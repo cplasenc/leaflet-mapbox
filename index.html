@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/toastr.css">
+    <title>U06P02</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- boton de inicio -->
+        <a class="navbar-brand" href="index.html">Inicio</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- abandonar la sesión -->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" id="logout" href="#">Finalizar sesión</a>
+            </li>
+        </ul>
+
+        <!-- formulario de inicio de sesion -->
+        <form class="form-inline my-2 my-lg-0" id="inicioSesion">
+            <input class="form-control mr-sm-2" type="text" placeholder="Usuario" id="emailLogin">
+            <input class="form-control mr-sm-2" type="text" placeholder="Contraseña" id="passLogin">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" id="miLogin">Iniciar Sesión</button>
+        </form>
+
+        <!-- botón para el modal de registro -->
+        <form class="form-inline my-2 my-lg-0">
+            <button type="button" class="btn btn-primary ml-2" data-toggle="modal" data-target="#exampleModalCenter" id="botonRegistro">
+                Registrarse
+            </button>
+        </form>
+
+    </nav>
+
+    <!-- modal de registro -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Registro de usuario</h5>
+                    <button type="button" id="miModal" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="formulario-registro">
+                        <div class="form-group">
+                            <label for="emailRegistro" class="col-form-label">E-mail</label>
+                            <input type="text" class="form-control" id="emailRegistro">
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordRegistro" class="col-form-label">Contraseña</label>
+                            <input type="text" class="form-control" id="passRegistro"></input>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" name="submit" value="submit" id="botonRegistroModal"
+                        class="btn btn-primary">Registrarse</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- formulario de busqueda -->
+    <div class="container" id="contenido">
+
+        <form class="m-3" id="formulario">
+            <div class="form-row">
+                <div class="col-7">
+                    <input type="text" class="form-control" id="buscar-nombre" placeholder="Busca por nombre... ej: farmacia">
+                </div>
+                <div class="col">
+                    <select class="custom-select" id="municipios-select" >
+                        <option>Seleccionar</option>
+                        <!-- municipios -->
+                    </select>
+                </div>
+                <div class="col">
+                    <input type="number" class="form-control" id="codigo-postal" placeholder="Código postal">
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- mapa -->
+        <div class="row">
+            <div id="miMapa" style="height: 618px; width: 1350px;"></div>
+        </div>
+
+        <div class="row">
+            <div> 
+                <h2>Inicia sesión o regístrate para ver mapa y filtros</h2>
+                <h4>Usuario valido: pepe@hola.com</h4>
+                <h4>Contraseña: 123456789</h4>
+
+                <h2>ejecutar en 127.0.0.1</h2>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
+
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+    /* Configuración de firebase para la practica */
+
+</script>
+<script src="./js/config.js"></script>
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+<script src="js/comercioArray.js"></script>
+
+<!-- bootstrap -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+<!-- externo -->
+<script src="js/jquery/jquery.js"></script>
+<script src="js/toastr.js"></script>
+
+<!-- propio -->
+<script src="js/auth.js"></script>
+<script src="js/codigospostales.js"></script>
+<script src="js/mapa.js"></script>
+
+</html>
