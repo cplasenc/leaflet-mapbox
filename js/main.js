@@ -2,6 +2,7 @@
 
 const api = config.API_KEY;
 let municipiosSelect = document.querySelector('#municipios-select');
+let contador = 0;
 
 /**
  * Creación del mapa
@@ -61,44 +62,62 @@ const getData = () => {
 /**
  * Dibujar la información en el mapa
  */
+var layerGroup = L.layerGroup();
 const pintarCoordenadas = () => {
 
     let cpIntroducido = document.querySelector('#codigo-postal').value;
     let buscarNombre = document.querySelector('#buscar-nombre').value;
     let municipioSeleccionado = document.querySelector('#municipios-select').value;
 
-    var theMarker = {};
+    mymap.addLayer(layerGroup);
+
     for (let i = 0; i < coordenadas.length; i++) {
         //buca por nombre
         if ((nombre[i].toLowerCase()).includes(buscarNombre.toLowerCase())) {
             if (buscarNombre != '') {
-                theMarker = L.marker(coordenadas[i], { icon: greenIcon }).addTo(mymap).bindPopup(nombre[i])
+                marker = L.marker(coordenadas[i], { icon: greenIcon })
+                layerGroup.addLayer(marker);
+                contador++;
             }
         }
 
         //bucamunicipio select
         if (municipioSeleccionado == cMunicipio[i]) {
-            L.marker(coordenadas[i],
+            marker = L.marker(coordenadas[i],
                 { icon: greenIcon })
                 .addTo(mymap)
                 .bindPopup(nombre[i])
+            layerGroup.addLayer(marker);
+            contador++;
         }
 
         //busca por codigo postal
         if (cpIntroducido == cpostal[i]) {
-            L.marker(coordenadas[i],
+            marker = L.marker(coordenadas[i],
                 { icon: greenIcon })
                 .addTo(mymap)
                 .bindPopup(nombre[i])
+            layerGroup.addLayer(marker);
+            contador++;
         }
     }
+    console.log(contador);
 }
 
 const search = () => {
     document.getElementById('formulario').addEventListener('submit', (e) => {
         e.preventDefault();
-        pintarCoordenadas();
+        console.log('funcion', contador);
+        if (contador > 0) {
+            borrarLayer();
+        }
+        pintarCoordenadas()
+
     });
+}
+
+const borrarLayer = () => {
+    layerGroup.clearLayers();
 }
 
 /**
@@ -116,5 +135,6 @@ const addMunicipios = () => {
     }
 }
 
+getData();
 addMunicipios();
 search();
