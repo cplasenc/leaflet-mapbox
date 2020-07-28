@@ -1,5 +1,3 @@
-//AÑADIR A UN GROUPLAYER Y LUEGO BORRAR EL GROUP LAYER
-
 const api = config.API_KEY;
 let municipiosSelect = document.querySelector('#municipios-select');
 let contador = 0;
@@ -40,27 +38,8 @@ const getData = () => {
         });
 }
 
-// const getData = async () => {
-//     const response = await fetch('js/comercios.json')
-//     if (response.status === 200) {
-//         return response.json()
-//     } else {
-//         throw new Error('Se ha producido un error')
-//     }
-// }
-
-// let nombre, coordenadas, cpostas, cMunicipo;
-// getData().then(response => {
-//     let comercios = response.features;
-//     nombre = comercios.map(comercio => comercio.properties.nombre)
-//     coordenadas = comercios.map(comercio => comercio.geometry.coordinates.reverse());
-//     cpostal = comercios.map(comercio => comercio.properties.cp);
-//     cMunicipio = comercios.map(comercio => comercio.properties.mun);
-//     console.log(nombre[0])
-// });
-
 /**
- * Dibujar la información en el mapa
+ * Dibujar la información en el mapa según el input del usuario
  */
 var layerGroup = L.layerGroup();
 const pintarCoordenadas = () => {
@@ -104,18 +83,22 @@ const pintarCoordenadas = () => {
     console.log(contador);
 }
 
+/**
+ * Ejecuta la funcion pintarCoordenadas
+ */
 const search = () => {
     document.getElementById('formulario').addEventListener('submit', (e) => {
         e.preventDefault();
-        console.log('funcion', contador);
         if (contador > 0) {
             borrarLayer();
         }
         pintarCoordenadas()
-
     });
 }
 
+/**
+ * Borra los marcadores del layerGroup
+ */
 const borrarLayer = () => {
     layerGroup.clearLayers();
 }
