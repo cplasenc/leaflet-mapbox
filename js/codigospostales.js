@@ -24,7 +24,7 @@ const codigoMunicipio = {
     SanCristóbaldelaLaguna: [38023],
     SanJuandelaRambla: [38034],
     SanMigueldeAbona: [38035],
-    SantaCruzdeTenerife: [38037],
+    SantaCruzdeTenerife: [38038],
     SantaÚrsula: [38039],
     SantiagodelTeide: [38040],
     Tacoronte: [38043],

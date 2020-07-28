@@ -5,14 +5,14 @@ let contador = 0;
 /**
  * Creación del mapa
  */
-var mymap = L.map('miMapa').setView([28.337503, -16.624173], 10);
+var map = L.map('miMapa').setView([28.337503, -16.624173], 10);
 
 L.tileLayer(`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${api}`, {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox/streets-v11',
     accessToken: 'your.mapbox.access.token'
-}).addTo(mymap);
+}).addTo(map);
 
 /** 
  * Creación de icono alternativo
@@ -48,7 +48,7 @@ const pintarCoordenadas = () => {
     let buscarNombre = document.querySelector('#buscar-nombre').value;
     let municipioSeleccionado = document.querySelector('#municipios-select').value;
 
-    mymap.addLayer(layerGroup);
+    map.addLayer(layerGroup);
 
     for (let i = 0; i < coordenadas.length; i++) {
         //buca por nombre
@@ -64,7 +64,7 @@ const pintarCoordenadas = () => {
         if (municipioSeleccionado == cMunicipio[i]) {
             marker = L.marker(coordenadas[i],
                 { icon: greenIcon })
-                .addTo(mymap)
+                .addTo(map)
                 .bindPopup(nombre[i])
             layerGroup.addLayer(marker);
             contador++;
@@ -74,7 +74,7 @@ const pintarCoordenadas = () => {
         if (cpIntroducido == cpostal[i]) {
             marker = L.marker(coordenadas[i],
                 { icon: greenIcon })
-                .addTo(mymap)
+                .addTo(map)
                 .bindPopup(nombre[i])
             layerGroup.addLayer(marker);
             contador++;
